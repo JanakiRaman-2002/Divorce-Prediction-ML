@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Diabetes Predictor</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+
+  
+</head>
+
+<!-- <script>
+	questions = ["If one of us apologizes when our discussion deteriorates, the discussion ends.",
+		 "I know we can ignore our differences, even if things get hard sometimes.",
+		 "When we need it, we can take our discussions with my spouse from the beginning and correct it.",
+		 "When I discuss with my spouse, to contact him will eventually work.",
+		 "The time I spent with my wife is special for us.",
+		 "We don't have time at home as partners.",
+		 "We are like two strangers who share the same environment at home rather than family.",
+		 "I enjoy our holidays with my wife.",
+		 "I enjoy traveling with my wife.",
+		 "Most of our goals are common to my spouse."]
+
+	function listItem(){
+  		for (var i = 0; i < questions.length; i++){
+    		var list = item.array[i];
+    
+    		// list = document.createElement('li');
+    		document.getElementById('this').innerHTML = list;
+    
+    		console.log(list);
+  		}  
+ 	}
+
+</script> -->
+
+
+
+<body>
+ <div class="login">
+	<div class="main">
+		<h1 class="head">Divorce Predictor 😉</h1>
+		<p style="text-align: center;">-----------------&nbsp;&nbsp;Based on model built from - <a style="text-decoration: none;color: aqua" href="https://www.kaggle.com/datasets/csafrit2/predicting-divorce"> kaggle dataset</a>&nbsp;&nbsp;-----------------</p>
+		<h3 class="smolhead"><span style="color:red">Legend:</span><br>0-Strongly Agree... &nbsp;&nbsp;1-Agree ...&nbsp;&nbsp;2-Neutral ...&nbsp;&nbsp;3-Disagree...&nbsp;&nbsp;4-Strongly Disagree</h3>
+	</div>
+	
+
+     
+    <form action="{{ url_for('predict')}}"method="post">
+
+
+				<div class="qstn">
+					<label for="Sorry_end">If one of us apologizes when our discussion deteriorates, the discussion ends.</label>
+
+					<div id="Sorry_end" class="options">
+						<input type="radio" id="SA" name="Sorry_end" value=0>
+						<label for="SA">0</label><br>
+						<input type="radio" id="MA" name="Sorry_end" value=1>
+						<label for="MA">1</label><br>
+						<input type="radio" id="SA" name="Sorry_end" value=2>
+						<label for="N">2</label><br>
+						<input type="radio" id="SA" name="Sorry_end" value=3>
+						<label for="MD">3</label><br>
+						<input type="radio" id="SD" name="Sorry_end" value=4>
+						<label for="SD">4</label><br>
+					</div>
+				</div>
+				
+				
+				<div class="qstn">
+                <label for="Ignore_diff">I know we can ignore our differences, even if things get hard sometimes.</label>
+				
+				<div id="Ignore_diff" class="options">
+					<input type="radio" id="SA" name="Ignore_diff" value=0>
+					<label for="SA">0</label><br>
+					<input type="radio" id="MA" name="Ignore_diff" value=1>
+					<label for="MA">1</label><br>
+					<input type="radio" id="SA" name="Ignore_diff" value=2>
+					<label for="N">2</label><br>
+					<input type="radio" id="SA" name="Ignore_diff" value=3>
+					<label for="MD">3</label><br>
+					<input type="radio" id="SD" name="Ignore_diff" value=4>
+					<label for="SD">4</label><br>
+				</div>
+			</div>
+
+			<div class="qstn">
+                <label for="begin_correct">When we need it, we can take our discussions with my spouse from the beginning and correct it.</label>
+
+				<div id="begin_correct" class="options">
+					<input type="radio" id="SA" name="begin_correct" value=0>
+					<label for="SA">0</label><br>
+					<input type="radio" id="MA" name="begin_correct" value=1>
+					<label for="MA">1</label><br>
+					<input type="radio" id="SA" name="begin_correct" value=2>
+					<label for="N">2</label><br>
+					<input type="radio" id="SA" name="begin_correct" value=3>
+					<label for="MD">3</label><br>
+					<input type="radio" id="SD" name="begin_correct" value=4>
+					<label for="SD">4</label><br>
+				</div>
+			</div>
+
+
+			<div class="qstn">			
+                <label for="Contact">When I discuss with my spouse, to contact him will eventually work.</label>
+
+				<div id="Contact" class="options">
+					<input type="radio" id="SA" name="Contact" value=0>
+					<label for="SA">0</label><br>
+					<input type="radio" id="MA" name="Contact" value=1>
+					<label for="MA">1</label><br>
+					<input type="radio" id="SA" name="Contact" value=2>
+					<label for="N">2</label><br>
+					<input type="radio" id="SA" name="Contact" value=3>
+					<label for="MD">3</label><br>
+					<input type="radio" id="SD" name="Contact" value=4>
+					<label for="SD">4</label><br>
+				</div>
+				</div>
+				<div class="qstn">
+
+                <label for="Special_time">The time I spent with my wife is special for us.</label>
+				
+				<div id="Special_time" class="options">
+					<input type="radio" id="SA" name="Special_time" value=0>
+					<label for="SA">0</label><br>
+					<input type="radio" id="MA" name="Special_time" value=1>
+					<label for="MA">1</label><br>
+					<input type="radio" id="SA" name="Special_time" value=2>
+					<label for="N">2</label><br>
+					<input type="radio" id="SA" name="Special_time" value=3>
+					<label for="MD">3</label><br>
+					<input type="radio" id="SD" name="Special_time" value=4>
+					<label for="SD">4</label><br>
+				</div>
+			</div>
+
+				<div class="qstn">
+                <label for="No_home_time">We don't have time at home as partners.</label>
+
+				<div id="No_home_time" class="options">
+					<input type="radio" id="SA" name="No_home_time" value=0>
+					<label for="SA">0</label><br>
+					<input type="radio" id="MA" name="No_home_time" value=1>
+					<label for="MA">1</label><br>
+					<input type="radio" id="SA" name="No_home_time" value=2>
+					<label for="N">2</label><br>
+					<input type="radio" id="SA" name="No_home_time" value=3>
+					<label for="MD">3</label><br>
+					<input type="radio" id="SD" name="No_home_time" value=4>
+					<label for="SD">4</label><br>
+				</div>
+			</div>
+
+
+				<div class="qstn">
+                <label for="2_strangers">We are like two strangers who share the same environment at home rather than family.</label>
+				
+				<div id="2_strangers" class="options">
+					<input type="radio" id="SA" name="2_strangers" value=0>
+					<label for="SA">0</label><br>
+					<input type="radio" id="MA" name="2_strangers" value=1>
+					<label for="MA">1</label><br>
+					<input type="radio" id="SA" name="2_strangers" value=2>
+					<label for="N">2</label><br>
+					<input type="radio" id="SA" name="2_strangers" value=3>
+					<label for="MD">3</label><br>
+					<input type="radio" id="SD" name="2_strangers" value=4>
+					<label for="SD">4</label><br>
+				</div>
+			</div>
+
+
+				<div class="qstn">
+                <label for="enjoy_holiday">I enjoy our holidays with my wife.</label>
+				
+				<div id="enjoy_holiday" class="options">
+					<input type="radio" id="SA" name="enjoy_holiday" value=0>
+					<label for="SA">0</label><br>
+					<input type="radio" id="MA" name="enjoy_holiday" value=1>
+					<label for="MA">1</label><br>
+					<input type="radio" id="SA" name="enjoy_holiday" value=2>
+					<label for="N">2</label><br>
+					<input type="radio" id="SA" name="enjoy_holiday" value=3>
+					<label for="MD">3</label><br>
+					<input type="radio" id="SD" name="enjoy_holiday" value=4>
+					<label for="SD">4</label><br>
+				</div>
+			</div>
+
+
+				<div class="qstn">
+				<label for="enjoy_travel">I enjoy traveling with my wife.</label>
+				
+				<div id="enjoy_travel" class="options">
+					<input type="radio" id="SA" name="enjoy_travel" value=0>
+					<label for="SA">0</label><br>
+					<input type="radio" id="MA" name="enjoy_travel" value=1>
+					<label for="MA">1</label><br>
+					<input type="radio" id="SA" name="enjoy_travel" value=2>
+					<label for="N">2</label><br>
+					<input type="radio" id="SA" name="enjoy_travel" value=3>
+					<label for="MD">3</label><br>
+					<input type="radio" id="SD" name="enjoy_travel" value=4>
+					<label for="SD">4</label><br>
+				</div>
+			</div>
+
+
+				<div class="qstn">
+
+				
+				<label for="common_goals">Most of our goals are common to my spouse.</label>
+				
+				<div id="common_goals" class="options">
+					<input type="radio" id="SA" name="common_goals" value=0>
+					<label for="SA">0</label><br>
+					<input type="radio" id="MA" name="common_goals" value=1>
+					<label for="MA">1</label><br>
+					<input type="radio" id="SA" name="common_goals" value=2>
+					<label for="N">2</label><br>
+					<input type="radio" id="SA" name="common_goals" value=3>
+					<label for="MD">3</label><br>
+					<input type="radio" id="SD" name="common_goals" value=4>
+					<label for="SD">4</label><br>
+				</div>
+			</div>
+			<div class="btn">
+				<button type="submit" name="submit_button" class='glowing-btn pos'><span class='glowing-txt'>PR<span class='faulty-letter'>E</span>DICT</span></button>
+			</div>
+		
+    </form>
+	<br>
+   <br>
+   {{ prediction_text }}
+
+
+	<div class="footer">
+    Made with ❤️ Jans
+	</div>
+ </div>
+
+
+</body>
+</html>
+
+
+
+
+    
+</html>
